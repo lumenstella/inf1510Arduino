@@ -1,6 +1,4 @@
-/* Egne notater
-Koblinger:                          Se i drive "koblinger"
-
+/* 
 Info
     - Reduser strings i utskrift for aa redusere minnebruk.
 
@@ -214,11 +212,11 @@ void kommando1(){
 
 void kommando2(){                                               //Brukeren er har sagt ferdig.  
     //skriv("k2", 0);               
-  if(mode=="ANNENHVER"){                                      //Hvis systemet og brukeren skal lese annenhver setning
+  if(mode=="ANNENHVER"){                                        //Hvis systemet og brukeren skal lese annenhver setning
       //skriv("A", 1);
      lesNesteSetning(true);
       setningNr++; //skriv("K2 oeker nr", 1);
-  }else if (mode=="SYSBRUKER"){                              //Hvis brukeren skal lese etter systemet
+  }else if (mode=="SYSBRUKER"){                                 //Hvis brukeren skal lese etter systemet
       //skriv("sb", 1);
       lesNesteSetning(true);
     } else if (mode=="BRUKERSYS"){                              //Hvis systemet skal lese etter brukere
@@ -265,7 +263,6 @@ void kommando4(){                                               //Brukeren har s
 
 void kommando5(){                                               //Brukeren har sagt "natta". Dvs at bamsen ikke skal brukes paa en stund.
     //skriv("Kommando 5", 0);
-    //TODO legg til aa spoerre om du er sikker paa at vi er ferdige
     siHade();                                                   //"skru av systemet"(egentlig bare i en slags ventemodus), gi feedback, og endre noedvendige variabler.
     resetMaseTid();                                             //Paa denne maaten speor systemet brukeren om forklaring eller hjelp er noedvendig til passende tid
     //skriv("kommando5 slutt", 10);
@@ -305,7 +302,7 @@ void kommando6(){
 }
 
 void kommando7(){
-  ferdigMedBok(false);                                        //Gjoer det som er noedvendig for aa vaere ferdig med boken. Uten aa si "bra jobba".
+  ferdigMedBok(false);                                          //Gjoer det som er noedvendig for aa vaere ferdig med boken. Uten aa si "bra jobba".
     treigTilAaLese=false;                                       //setter denne til false, siden det ikke er mulig at brukeren trenger hjelp til aa lese noe.
     treigtBokValg=false;                                        //setter denne til false, siden det ikke er mulig at brukeren trenger hjelp til velge bok.
     stilleSiden=millis();
@@ -339,7 +336,7 @@ void loop() {
     //49 --> utover vil si tallene paa data tastaturet som ble brukt under evalueringen siden VRM en ikke fungerte.
     //for aa bruke VRM en vil man istedet bruke 0x11, 0x12 osv. 
     
-    //VRM kortet sende 0x11 til 0x15 naar nokkelord 1-5 blir sagt
+    //VRM kortet sender 0x11 til 0x15 naar nokkelord 1-5 blir sagt 
     case 0x11: kommando1();
     break;
     
@@ -355,9 +352,9 @@ void loop() {
     case 0x15: kommando5();
     break;
     
-    //vi kaller kommando 1-7 ved aa sende tallene 1-7 fra PC
-    case 49:   //bytter ut 0x11 med 49                                               //VRM gjennkjente lyd tilsvarende innspillt lyd paa plass 1.
-		kommando1();                                                //Kjoer kommando 1.
+									 //vi kaller kommando 1-7 ved aa sende tallene 1-7 fra PC
+    case 49:   //bytter ut 0x11 med 49                                    //VRM gjennkjente lyd tilsvarende innspillt lyd paa plass 1.
+		kommando1();                                              //Kjoer kommando 1.
 		break;
 		
 		case 50:                                                  //VRM gjennkjente lyd tilsvarende innspillt lyd paa plass 2.
@@ -376,7 +373,7 @@ void loop() {
 		kommando5();	                                              //Kjoer kommando 5.
 		break;	
 
-    case 54:                                                    //Kjorer kommando 6
+    case 54:                                            		    //Kjorer kommando 6
     kommando6();
     break;
 
@@ -477,7 +474,7 @@ void valgtBok(){                                                //Brukeren har v
       lesSetning(true);
       siDinTur();
     } else {
-      //skriv("Du satte systemet til en modus som ikke finnes", 1);
+      								//skriv("Du satte systemet til en modus som ikke finnes", 1);
       fatalError(404);
     }
 
@@ -526,7 +523,7 @@ void stallTillOnPress(){                                        //Vent til bamse
 skriv("systemet venter paa signal", 0);
   tiltState=digitalRead(tiltPin);
   boolean exitPgaTilt=false;
-  while(!digitalRead(onPin)&&!exitPgaTilt && !exitPgaKnapp){                     //Paa-knappen maa vaere trykket ned, og bamsen i oppreist posisjon.
+  while(!digitalRead(onPin)&&!exitPgaTilt && !exitPgaKnapp){    //Paa-knappen maa vaere trykket ned, og bamsen i oppreist posisjon.
     if(Serial.available()){
        byte sendt = Serial.read();
        if(sendt == 55){
@@ -544,7 +541,7 @@ skriv("systemet venter paa signal", 0);
   exitPgaKnapp=false;
   
   //Serial.print("_/");
-  siHeiOgVelg();                                                      //Gi feedback om at systemet har startet.
+  siHeiOgVelg();                                                //Gi feedback om at systemet har startet.
   skriv("systemet er paa", 10);
 }
 
@@ -566,7 +563,7 @@ void ventTilDetErStille(){
       ventTilDetErStille();
       fortsett = false;
     }
-    if(millis()> stilleMillis + 500){                       //Skal gjore noe om d er gaatt lang nok tid
+    if(millis()> stilleMillis + 500){                   	 //Skal gjore noe om d er gaatt lang nok tid
       
       fortsett = false;
     }
@@ -669,7 +666,7 @@ void skriv(String info, byte tabs){                             //Egen utskrift 
 }
 
 
-void skrivKommandoVindu(){                                      //Denne metoden er beregnet for evalueringen med wizard og Oz,
+void skrivKommandoVindu(){                                     //Denne metoden er beregnet for evalueringen med wizard og Oz,
                                                                //da vi paa grunn av mulige feil valgte aa gjore det paa denne maaten. for aa redusere antall ting som kunne gaa galt.
   Serial.println("\n Kommandoer:"); 
   Serial.println(" 1 - Hjelp");
@@ -682,7 +679,7 @@ void skrivKommandoVindu(){                                      //Denne metoden 
  }
 
 void tomKoo(){
-                                 //Mens systemet faar input fra VRM.
+                                 				//Mens systemet faar input fra VRM.
   skriv("tomKoo startet",0);
   while(Serial.available()){       
     skriv("fjernet kommando fra ko",1);
