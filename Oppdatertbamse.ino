@@ -4,13 +4,6 @@ Koblinger:                          Se i drive "koblinger"
 Info
     - Reduser strings i utskrift for aa redusere minnebruk.
 
-  "//TODO" skrives der vi maa gjoere noe
-  - tilt for paa -test
-  - Fjern //Serial.print's naar testet
-  - lage lydfil med bakgrunnshistorie
-  - lage lydfil som sier hva man skal gjøre om man sitter fast. 
-*/
-
 /* Dette programmet styrer en bamse som hjelper barn med aa lese tekster.
  * 
  * @author  http://www.uio.no/studier/emner/matnat/ifi/INF1510/v16/prosjekter/karoshi/
@@ -43,8 +36,6 @@ Mulig input fra bruker:
   Kommando 6 er "Hei" 
   Kommando 7 er "Skru på/av"
  
-
-  
 
 Om lydfilene paa SD-Kortet:
     - Alle maa hete "trackXYZ.mp3"
